@@ -3,7 +3,6 @@
 html,body{
 background-image: url('https://www.sykes.com/wp-content/uploads/2020/10/100820-feature-image-gen-z-mobile-digital-blog-scaled.jpg');
 background-size: cover;
-background-repeat: no-repeat;
 height: 100%;
 font-family: 'Numans', sans-serif;
 }
@@ -14,7 +13,7 @@ align-content: center;
 }
 
 .cardregister{
-    height: 850px;
+    height: 780px;
     margin-top: 4%;
     margin-bottom: auto;
     width: 400px;
@@ -59,4 +58,16 @@ width: 100px;
 color: black;
 background-color: white;
 }
+
+.back_btn{
+    color: black;
+    background-color: #B586BD;
+    transition: background-color 1s;
+    width: 100px;
+    }
+    
+    .back_btn:hover{
+    color: black;
+    background-color: white;
+    }
 

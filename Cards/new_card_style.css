@@ -7,11 +7,6 @@ height: 100%;
 font-family: 'Numans', sans-serif;
 }
 
-.container{
-height: 100%;
-align-content: center;
-}
-
 body {
     font-family: "Open Sans", sans-serif;
     color: #444444;
@@ -174,13 +169,17 @@ body {
     .full-text { display: none; }
   }
   
+ 
+.container{
+height: 100%;
+align-content: center;
+}
 
 .cardnewcontact{
-    height: 350px;
+    height: 510px;
     margin-top: 13%;
     margin-bottom: auto;
     width: 400px;
-    border-radius: 13px;
     background-color: rgba(0,0,0,0.5) !important;
     }
 
@@ -236,8 +235,8 @@ background-color: white;
         padding-right: 12px;
         padding-top: 5px;
         padding-bottom: 5px;
-      }
-      .signout_btn:hover{
-        background-color: #F8B84E;
-        cursor: pointer;
-      }
+}
+.signout_btn:hover{
+  background-color: #F8B84E;
+  cursor: pointer;
+}

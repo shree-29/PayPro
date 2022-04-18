@@ -1,14 +1,37 @@
+<?php
+
+$db = mysqli_connect('localhost','root','','payprodb')
+or die('Error connecting to MySQL server.');
+session_start();
+$username=$_SESSION['username'];
+$_SESSION['username']=$username;
+$pay_id=$_SESSION['pay_id'];
+
+if($username=='')
+{
+  header("Location:../Home/home.html");
+        exit(); 
+}
+if(isset($_POST['signout']))
+{
+  session_destroy();
+    header("Location:../Login/login.php");
+          exit();
+}
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PayPro-Home</title>
+    <title>Profile</title>
     <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  <title>Arsha Bootstrap Template - Index</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -30,7 +53,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
   <!-- Template Main CSS File -->
-  <link href="style.css" rel="stylesheet">
+  <link href="profilehome_style.css" rel="stylesheet">
   <link rel="icon" href="https://is2-ssl.mzstatic.com/image/thumb/Purple118/v4/46/d1/61/46d16165-c305-5c6f-7626-1a60208042f3/source/512x512bb.jpg" type="image/icon type">
 </head>
 <body>
@@ -40,13 +63,20 @@
             <span class="full-text" >
               <nav id="navbar" class="navbar" style="margin-top: 0%;">
                 <ul>
-                  <li><h1 class="logo me-auto" ><a href=""><i style="font-size: 35px;"><strong>PayPro</strong></i></a></h1></li>
-                  <ul style="margin-left: 50%;">
-                    <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-                    <li><a class="nav-link scrollto" href="#about">About</a></li>
-                    <li><a class="nav-link scrollto" href="#team">Team</a></li>
-                    <li><a class="nav-link scrollto" href="#tab">Contact</a></li>
-                    <li><a class="getstarted scrollto" href="../Login/login.php">Login/Sign Up  </a></li>
+                  <li><h1 class="logo me-auto" ><a href="../Userhome/userhome.php"><i style="font-size: 35px;"><strong>PayPro</strong></i></a></h1></li>
+                  <ul style="margin-left: 29%;">
+                  <li><a class="nav-link scrollto" href="../Profile/manageprofile.php">Manage Profile</a></li>                   
+                    <li><a class="nav-link scrollto " href="../Userhome/recharge.php">Recharge</a></li>
+                    <li><a class="nav-link scrollto" href="../Userhome/remove_money.php">Remove Money</a></li>
+                    <li><a class="nav-link scrollto" href="../Profile/password_reset.php">Reset Password</a>
+                    <li><form method="post" action="../Login/login.php"><input type="submit"  style="width: 120px;
+                      border-radius: 20px;
+                      height: 40px;
+                      border-color: white;
+                      background-color: #892883;
+                      color: white;
+                      margin-left:20px;
+                      font-size: 18px;" value="SignOut" id="signout" name="signout" ></form></li>
                   </ul>
                 </ul>
               </nav>
@@ -64,11 +94,18 @@
               <br>
               <nav id="navbar" class="navbar">
               <ul style="margin-left: 0%;">
-                <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-                <li><a class="nav-link scrollto" href="#about">About</a></li>
-                <li><a class="nav-link scrollto" href="#team">Team</a></li>
-                <li><a class="nav-link scrollto" href="#tab">Contact</a></li>
-                <li><a class="getstarted scrollto" href="../Login/login.html">Login/Sign Up  </a></li>
+              <li><a class="nav-link scrollto" href="../Profile/manageprofile.php">Manage Profile</a></li>                   
+                    <li><a class="nav-link scrollto " href="../Userhome/recharge.php">Recharge</a></li>
+                    <li><a class="nav-link scrollto" href="../Userhome/remove_money.php">Remove Money</a></li>
+                    <li><a class="nav-link scrollto" href="../Profile/password_reset.php">Reset Password</a>
+                    <li><form method="post" action="../Login/login.php"><input type="submit"  style="width: 120px;
+                      border-radius: 20px;
+                      height: 40px;
+                      border-color: white;
+                      background-color: #892883;
+                      color: white;
+                      margin-left:20px;
+                      font-size: 18px;" value="SignOut" id="signout" name="signout" ></form></li>
               </ul>
               </nav>
               <!-- .navbar --> 
@@ -103,8 +140,10 @@
           </div>       
     
       </section><!-- End Hero -->
+      <br>
     
       <main id="main">       
+        
         <!-- ======= About Us Section ======= -->
         <section id="about" class="about">
           <div class="container" data-aos="fade-up" style="background-color: #E9C3EF; margin-left: 2%; margin-right: 2%;border-radius: 25px;">
@@ -138,139 +177,110 @@
         </section>
         <!-- End About Us Section -->
 
-         <!-- ======= Team Section ======= -->
-         <section id="team" class="team section-bg">
+
+        <!-- ======= Accept payments online ======= -->
+        <section id="payment online" class="team section-bg">
           <div class="section-title">
-            <h2>Team</h2>
+            <h2>Accept payments online with ease</h2>
           </div>
         <div class="html1">
         <div class="row">
 
           <div class="column1">
-            <div class="card1">
-              <center>
-                <img src="team-3.jpg"  class="card-img-top" style="width: 50%;border-radius: 100px;margin-top: 10px;">
-              </center>
+            <div class="card1">              
               <div class="container1">
-                <div class="card-body" id="cardfont">
+                <div class="card-body" id="cardfont1">
                 <center>
-                  <h2 class="card-title">KK Shree</h2>
-                  <span>Project Manager</span>
+                  <h2 class="card-title">Industry Best Success Rates</h2>
                 </center> 
                   </div>
-                <p>
+                <div id="cardfont2">
                   <center>
-                    <a href="#" class="fa fa-twitter" style="font-size: 23px;"></a>&emsp;
-                  <a href="#" class="fa fa-facebook" style="font-size: 23px;"></a>&emsp;
-                  <a href="#" class="fa fa-instagram" style="font-size: 23px;"></a>&emsp;
-                  <a href="#" class="fa fa-linkedin" style="font-size: 23px;"></a>&emsp;
+                    With PayPro intelligent routing & direct bank integrations, we ensure that your customers payments go through every time 
+                    <br>                 
                   </center>
-                </p>                                
-              </div>
-            </div>
-          </div>
-        
-          <div class="column1">
-            <div class="card1">
-              <center>
-              <img src="team-3.jpg"  class="card-img-top" style="width: 50%;border-radius: 100px;margin-top: 10px;">
-            </center>
-              <div class="container1">
-                <div class="card-body" id="cardfont">
-                  <center>
-                    <h2 class="card-title">Kowshik Harish S</h2>
-                    <span>Software Engineer</span>
-                  </center> 
-                    </div>
-              <p>
-                <center>
-                  <a href="#" class="fa fa-twitter" style="font-size: 23px;"></a>&emsp;
-                  <a href="#" class="fa fa-facebook" style="font-size: 23px;"></a>&emsp;
-                  <a href="#" class="fa fa-instagram" style="font-size: 23px;"></a>&emsp;
-                  <a href="#" class="fa fa-linkedin" style="font-size: 23px;"></a>&emsp;
-                </center>
-              </p>                
-              </div>
-            </div>
-          </div>
-          
-          <div class="column1">
-            <div class="card1">
-              <center>
-              <img src="team-3.jpg"  class="card-img-top" style="width: 50%;border-radius: 100px;margin-top: 10px;">
-            </center>
-              <div class="container1">
-                <div class="card-body" id="cardfont">
-                  <center>
-                    <h2 class="card-title">N Nishith</h2>
-                    <span>Software Engineer</span>
-                  </center> 
-                    </div>
-              <p>
-                <center>
-                  <a href="#" class="fa fa-twitter" style="font-size: 23px;"></a>&emsp;
-                  <a href="#" class="fa fa-facebook" style="font-size: 23px;"></a>&emsp;
-                  <a href="#" class="fa fa-instagram" style="font-size: 23px;"></a>&emsp;
-                  <a href="#" class="fa fa-linkedin" style="font-size: 23px;"></a>&emsp;
-                </center>
-              </p>              
+                </div>                                
               </div>
             </div>
           </div>
 
           <div class="column1">
-            <div class="card1">
-              <center>
-              <img src="team-3.jpg"  class="card-img-top" style="width: 50%;border-radius: 100px;margin-top: 10px;">
-            </center>
+            <div class="card1">              
               <div class="container1">
-                <div class="card-body" id="cardfont">
-                  <center>
-                    <h2 class="card-title">Praveen S</h2>
-                    <span>Business Analyst</span>
-                  </center> 
-                    </div>
-              <p>
+                <div class="card-body" id="cardfont1">
                 <center>
-                  <a href="#" class="fa fa-twitter" style="font-size: 23px;"></a>&emsp;
-                  <a href="#" class="fa fa-facebook" style="font-size: 23px;"></a>&emsp;
-                  <a href="#" class="fa fa-instagram" style="font-size: 23px;"></a>&emsp;
-                  <a href="#" class="fa fa-linkedin" style="font-size: 23px;"></a>&emsp;
-                </center>
-              </p>
+                  <h2 class="card-title">India's Most Widely Used Checkout</h2>
+                </center> 
+                  </div>
+                <div id="cardfont2">
+                  <center>
+                    Over 330 million Indians prefer the PayPro Checkout & you can now give your customers the checkout experience they love 
+                    <br>                 
+                  </center>
+                </div>                                
               </div>
             </div>
           </div>
 
           <div class="column1">
-            <div class="card1">
-              <center>
-              <img src="team-2.jpg"  class="card-img-top" style="width: 50%;border-radius: 100px;margin-top: 10px;">
-            </center>
+            <div class="card1">              
               <div class="container1">
-                <div class="card-body" id="cardfont">
-                  <center>
-                    <h2 class="card-title">Sameeksha</h2>
-                    <span>Tester</span>
-                  </center> 
-                    </div>
-              <p>
+                <div class="card-body" id="cardfont1">
                 <center>
-                  <a href="#" class="fa fa-twitter" style="font-size: 23px;"></a>&emsp;
-                  <a href="#" class="fa fa-facebook" style="font-size: 23px;"></a>&emsp;
-                  <a href="#" class="fa fa-instagram" style="font-size: 23px;"></a>&emsp;
-                  <a href="#" class="fa fa-linkedin" style="font-size: 23px;"></a>&emsp;
-                </center>
-              </p>
+                  <h2 class="card-title">Dedicated Support for Customers</h2>
+                </center> 
+                  </div>
+                <div id="cardfont2">
+                  <center>
+                    All online merchants and payment gateway users on PayPro get dedicated support via a toll-free number and email
+                    <br>                 
+                  </center>
+                </div>                                
               </div>
             </div>
           </div>
-
         </div>
       </div>
       <br>
-    </section>     
-        <!-- End Team Section -->
+    </section>             
+        <!-- Accept payments online -->
+
+
+        <!-- ======= PayPro UPI Transfer ======= -->
+        <section id="upi" class="upi">
+          <div class="container" data-aos="fade-up" style="background-color: #E9C3EF; margin-left: 2%; margin-right: 2%;border-radius: 25px;">
+    
+            <div class="section-title">
+              <h2>PayPro UPI Transfer</h2>
+            </div>
+    
+            <div class="row content" style="margin-top: -2%;">
+              <div class="col-lg-6" style="font-family: sans-serif;font-size: 20px;">              
+                
+                  <table style="width: 100%;padding-left: 3%;">
+                    <tr>
+                      <td style="width: 30%;">
+                        Pay anyone directly from your bank account. 
+                      </td>
+                      <td rowspan="2">
+                        <img src="bhimupi.png" style="width: 90%;height: 40%;"> 
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        Pay anyone, everywhere. Make contactless and secure payments in-stores or online using PayPro Wallet or Directly from your 
+                        Bank Account. Plus, send & receive money from anyone.  
+                      </td>
+                    </tr>
+                  </table>
+                <br>
+              </div>             
+            </div>    
+          </div>
+        </section>
+        <!-- PayPro UPI Transfer -->
+
+
 
     <!-- Footer Section -->
         <section>
@@ -331,7 +341,7 @@
                 <td>
                 </td>
                 <td>
-                  <a class="nav-link scrollto active" href="#tab" style="color: black;">Contact</a>
+                  <a class="nav-link scrollto active" href="#contact" style="color: black;">Contact</a>
                 </td>
                 <td>
                   <i class="fa fa-fax" style="color: black;font-size:20px"></i>&emsp; +91 90817 24356
@@ -397,7 +407,7 @@
                     <td><a class="nav-link scrollto active" href="#team" style="color: black;">Team</a> <br></td>                    
                   </tr>
                   <tr>
-                    <td><a class="nav-link scrollto active" href="#tab" style="color: black;">Contact</a> <br></td>                    
+                    <td><a class="nav-link scrollto active" href="#contact" style="color: black;">Contact</a> <br></td>                    
                   </tr>
                   <tr>
                     <td><a class="getstarted scrollto" href="../Login/login.html" style="color: black;">Login/Sign Up  </a> <br></td>                    
